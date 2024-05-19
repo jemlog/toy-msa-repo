@@ -1,0 +1,38 @@
+server:
+  port: 8080
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: default
+  application:
+    name: api-gateway
+  cloud:
+    kubernetes:
+      config:
+        enabled: false
+
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
+    leaseRenewalIntervalInSeconds: 10
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+  cloud:
+    kubernetes:
+      discovery:
+        all-namespaces: true
+
+eureka:
+  client:
+    enabled: false
