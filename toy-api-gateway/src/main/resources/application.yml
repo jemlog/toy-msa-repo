@@ -13,12 +13,28 @@ spring:
     kubernetes:
       config:
         enabled: false
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/users/**
+            - Method=GET
+          filters:
+        #    - name: AuthorizationHeaderFilter
+        #      args:
+        #        whiteList:
+        #          jeminToken: jemin
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
 
 eureka:
   instance:
     instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
     leaseRenewalIntervalInSeconds: 10
   client:
+    register-with-eureka: true
+    fetch-registry: true
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
 
@@ -31,7 +47,19 @@ spring:
   cloud:
     kubernetes:
       discovery:
-        all-namespaces: true
+        all-namespaces: true # 전체 namespace를 다 검색
+      loadbalancer:
+        mode: service # service를 사용해서 검색
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/user-service/users
+            - Method=GET
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
 
 eureka:
   client:
