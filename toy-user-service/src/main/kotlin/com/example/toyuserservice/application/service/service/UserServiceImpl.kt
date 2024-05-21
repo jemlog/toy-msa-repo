@@ -2,7 +2,7 @@ package com.example.toyuserservice.application.service.service
 
 import com.example.toyuserservice.application.service.dto.UserResponse
 import com.example.toyuserservice.application.service.`in`.UserService
-import com.example.toyuserservice.client.ProductServiceClient
+import com.example.toyuserservice.client.http.ProductServiceClient
 import org.springframework.stereotype.Service
 
 @Service

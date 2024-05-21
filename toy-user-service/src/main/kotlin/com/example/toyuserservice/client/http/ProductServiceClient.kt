@@ -1,4 +1,4 @@
-package com.example.toyuserservice.client
+package com.example.toyuserservice.client.http
 
 import org.springframework.stereotype.Component
 

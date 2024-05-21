@@ -17,6 +17,7 @@ class UserController(
 
     @GetMapping("/users/{userId}")
     fun getUsers(@PathVariable(value = "userId") userId: Long): ResponseEntity<UserResponse> {
+        log.info("user service income...")
         val userResponse = userService.getUser(userId)
         log.info("getUser() success")
         return ResponseEntity.ok(userResponse);

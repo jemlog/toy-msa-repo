@@ -55,7 +55,7 @@ spring:
         - id: user-service
           uri: lb://user-service
           predicates:
-            - Path=/user-service/users
+            - Path=/user-service/users/**
             - Method=GET
           filters:
             - RemoveRequestHeader=Cookie

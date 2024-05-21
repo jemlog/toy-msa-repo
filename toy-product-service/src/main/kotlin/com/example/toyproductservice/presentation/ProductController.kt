@@ -18,6 +18,7 @@ class ProductController(
 
     @GetMapping("/users/{userId}/products")
     fun getProducts(@PathVariable(value = "userId") userId: Long): ResponseEntity<List<ProductResponse>>{
+        log.info("product service income")
         val product = productService.getProduct(userId)
         log.info("getProducts() success")
         return ResponseEntity.ok(product)

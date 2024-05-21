@@ -1,4 +1,4 @@
-package com.example.toyuserservice.client
+package com.example.toyuserservice.client.http
 
 data class ProductResponse(
     val productId: Long,
